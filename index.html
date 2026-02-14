@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PK LIONS ESPORTS</title>
+<link rel="stylesheet" href="style.css">
 
-  // Your web app's Firebase configuration
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+  import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
+
   const firebaseConfig = {
     apiKey: "AIzaSyCw2RT-5llOwGBj3Cro1YZzvaEP-UuFc8Q",
     authDomain: "pk-lions-esports.firebaseapp.com",
@@ -17,46 +23,54 @@
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-</script>
-<html>
-<head>
-<title>PK LIONS ESPORTS</title>
-<link rel="stylesheet" href="style.css">
-</head>
+  const db = getFirestore(app);
+  const storage = getStorage(app);
 
+  window.db = db;
+  window.storage = storage;
+</script>
+<script src="script.js" type="module"></script>
+</head>
 <body>
 
 <header>
 <h1>PK LIONS ESPORTS</h1>
-<a class="whatsapp" href="https://chat.whatsapp.com/JLhkyWtPQbAE06StUBN8m2">Join WhatsApp</a>
+<a class="whatsapp-btn" href="https://chat.whatsapp.com/JLhkyWtPQbAE06StUBN8m2" target="_blank">Join WhatsApp</a>
 </header>
 
 <section class="hero">
-<h2>Professional PUBG Tournaments</h2>
-<button onclick="join()">Join Tournament</button>
+<h2>Register Your Team for Tournaments</h2>
+<p>Professional PUBG Mobile Esports Organization</p>
 </section>
 
-<section>
-<h3>Points Calculator</h3>
-<input id="rank" placeholder="Rank">
-<button onclick="calc()">Calculate</button>
+<section class="registration">
+<h2>Team Registration</h2>
+<form id="regForm">
+<input placeholder="Team Name" id="team" required>
+<input placeholder="Team Tag" id="tag" required>
+<input type="file" id="logo" accept="image/*" required>
+<input placeholder="Player 1" id="p1" required>
+<input placeholder="Player 2" id="p2" required>
+<input placeholder="Player 3" id="p3" required>
+<input placeholder="Player 4" id="p4" required>
+<input placeholder="Sub Player" id="sub" required>
+<input placeholder="IGL / Sponsor" id="igl" required>
+<input placeholder="WhatsApp Number" id="wa" required>
+<button type="submit">REGISTER TEAM</button>
+</form>
+<p id="regResult"></p>
+</section>
+
+<section class="points-calculator">
+<h2>Points Calculator</h2>
+<input id="rank" placeholder="Enter Rank">
+<button onclick="calcPoints()">Calculate</button>
 <p id="result"></p>
-</section>
-
-<section>
-<h3>Team Roster</h3>
-<p>Coming Soon</p>
-</section>
-
-<section>
-<h3>Gallery</h3>
-<p>Upload posters inside assets folder</p>
 </section>
 
 <footer>
 PK LIONS ESPORTS © 2026
 </footer>
 
-<script src="script.js"></script>
 </body>
 </html>
