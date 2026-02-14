@@ -1,2 +1,46 @@
-<h1>Admin Panel</h1>
-<p>Add tournaments manually for now.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PK LIONS Admin Panel</title>
+<link rel="stylesheet" href="../style.css">
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getFirestore, collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+  import { getStorage, ref, deleteObject } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCw2RT-5llOwGBj3Cro1YZzvaEP-UuFc8Q",
+    authDomain: "pk-lions-esports.firebaseapp.com",
+    projectId: "pk-lions-esports",
+    storageBucket: "pk-lions-esports.firebasestorage.app",
+    messagingSenderId: "725502290207",
+    appId: "1:725502290207:web:e891ae8a0ead42b29fa82a"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const storage = getStorage(app);
+
+  window.db = db;
+  window.storage = storage;
+</script>
+
+<script type="module" src="adminScript.js"></script>
+</head>
+
+<body>
+<header>
+<h1>PK LIONS Admin Panel</h1>
+</header>
+
+<section class="admin-panel">
+<h2>Registered Teams</h2>
+<div id="teamsList"></div>
+</section>
+
+</body>
+</html>
