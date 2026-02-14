@@ -1,12 +1,11 @@
-import { db, storage } from './index.html'; // Firebase already initialized
-
+import { db, storage } from './index.html';
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
 
 const regForm = document.getElementById("regForm");
 const regResult = document.getElementById("regResult");
 
-regForm.addEventListener("submit", async (e) => {
+regForm.addEventListener("submit", async (e)=>{
     e.preventDefault();
 
     const team = document.getElementById("team").value;
@@ -20,35 +19,35 @@ regForm.addEventListener("submit", async (e) => {
     const wa = document.getElementById("wa").value;
     const logoFile = document.getElementById("logo").files[0];
 
-    if (!team || !tag || !p1 || !p2 || !p3 || !p4 || !sub || !igl || !wa || !logoFile) {
-        regResult.innerText = "Please fill all fields!";
+    if(!team || !tag || !p1 || !p2 || !p3 || !p4 || !sub || !igl || !wa || !logoFile){
+        regResult.innerText="Please fill all fields!";
         return;
     }
 
-    try {
+    try{
         const logoRef = ref(storage, teamLogos/${logoFile.name});
         await uploadBytes(logoRef, logoFile);
         const logoURL = await getDownloadURL(logoRef);
 
-        await addDoc(collection(db, "teams"), {
+        await addDoc(collection(db,"teams"),{
             team, tag, p1, p2, p3, p4, sub, igl, wa, logoURL, timestamp: serverTimestamp()
         });
 
-        regResult.innerText = "Team registered successfully!";
+        regResult.innerText="Team registered successfully!";
         regForm.reset();
-    } catch(err) {
+    }catch(err){
         console.error(err);
-        regResult.innerText = "Error registering team!";
+        regResult.innerText="Error registering team!";
     }
 });
 
 // Points Calculator
-window.calcPoints = function() {
+window.calcPoints=function(){
     const r = document.getElementById("rank").value;
     let p = 0;
     if(r==1)p=10;
     else if(r==2)p=6;
     else if(r==3)p=4;
     else if(r>3)p=2;
-    document.getElementById("result").innerText = "Points: " + p;
+    document.getElementById("result").innerText="Points: "+p;
 };
