@@ -9,6 +9,9 @@ text-align:center;
 header{
 background:#111;
 padding:20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
 header h1{
@@ -23,11 +26,11 @@ padding:10px 20px;
 border-radius:5px;
 text-decoration:none;
 font-weight:bold;
-margin-left:10px;
 }
 
 .hero{
-padding:50px 20px;
+padding:60px 20px;
+background:#111;
 }
 
 .hero h2{
@@ -35,7 +38,7 @@ font-size:2rem;
 margin-bottom:10px;
 }
 
-.registration, .points-calculator{
+.registration, .points-calculator, .tournament{
 background:#111;
 margin:20px auto;
 padding:20px;
@@ -68,30 +71,4 @@ footer{
 padding:15px;
 background:#111;
 margin-top:20px;
-}
-.admin-panel{
-width:90%;
-max-width:800px;
-margin:20px auto;
-background:#111;
-padding:20px;
-border-radius:10px;
-}
-
-.team-card{
-background:#222;
-padding:15px;
-margin:15px 0;
-border-radius:10px;
-color:gold;
-}
-
-.team-card button{
-background:red;
-color:white;
-padding:10px 15px;
-border:none;
-font-weight:bold;
-cursor:pointer;
-border-radius:5px;
 }
