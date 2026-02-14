@@ -6,11 +6,11 @@
 <title>PK LIONS ESPORTS</title>
 <link rel="stylesheet" href="style.css">
 
-<!-- Firebase -->
+<!-- Firebase SDK -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
-  import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
+  import { getFirestore, collection, addDoc, serverTimestamp, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+  import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCw2RT-5llOwGBj3Cro1YZzvaEP-UuFc8Q",
@@ -21,7 +21,6 @@
     appId: "1:725502290207:web:e891ae8a0ead42b29fa82a"
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const storage = getStorage(app);
@@ -29,7 +28,8 @@
   window.db = db;
   window.storage = storage;
 </script>
-<script src="script.js" type="module"></script>
+
+<script type="module" src="script.js"></script>
 </head>
 <body>
 
@@ -39,7 +39,7 @@
 </header>
 
 <section class="hero">
-<h2>Register Your Team for Tournaments</h2>
+<h2>Welcome to PK LIONS ESPORTS</h2>
 <p>Professional PUBG Mobile Esports Organization</p>
 </section>
 
@@ -59,6 +59,11 @@
 <button type="submit">REGISTER TEAM</button>
 </form>
 <p id="regResult"></p>
+</section>
+
+<section class="tournament">
+<h2>Upcoming Tournaments</h2>
+<div id="tournamentList">No tournaments added yet.</div>
 </section>
 
 <section class="points-calculator">
