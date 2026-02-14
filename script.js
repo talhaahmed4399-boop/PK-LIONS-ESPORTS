@@ -1,13 +1,16 @@
 import { db, storage } from './index.html';
-import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+import { collection, addDoc, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
 
 const regForm = document.getElementById("regForm");
 const regResult = document.getElementById("regResult");
+const tournamentList = document.getElementById("tournamentList");
+const leaderboardList = document.getElementById("leaderboardList");
+const newsList = document.getElementById("newsList");
 
+// TEAM REGISTRATION
 regForm.addEventListener("submit", async (e)=>{
     e.preventDefault();
-
     const team = document.getElementById("team").value;
     const tag = document.getElementById("tag").value;
     const p1 = document.getElementById("p1").value;
@@ -41,13 +44,52 @@ regForm.addEventListener("submit", async (e)=>{
     }
 });
 
-// Points Calculator
-window.calcPoints=function(){
-    const r = document.getElementById("rank").value;
-    let p = 0;
-    if(r==1)p=10;
-    else if(r==2)p=6;
-    else if(r==3)p=4;
-    else if(r>3)p=2;
-    document.getElementById("result").innerText="Points: "+p;
-};
+// FETCH TOURNAMENTS / LEADERBOARD / NEWS (PLACEHOLDER)
+async function loadGlobalData(){
+    // Example: fetch tournaments
+    tournamentList.innerHTML="Loading...";
+    const tournamentsSnap = await getDocs(collection(db,"tournaments"));
+    if(tournamentsSnap.empty){
+        tournamentList.innerHTML="No tournaments yet.";
+    } else {
+        tournamentList.innerHTML="";
+        tournamentsSnap.forEach(doc=>{
+            const data = doc.data();
+            const div = document.createElement("div");
+            div.innerHTML=<strong>${data.name}</strong> | ${data.date};
+            tournamentList.appendChild(div);
+        });
+    }
+
+    // Example: fetch leaderboard
+    leaderboardList.innerHTML="Loading...";
+    const leaderboardSnap = await getDocs(collection(db,"leaderboard"));
+    if(leaderboardSnap.empty){
+        leaderboardList.innerHTML="No leaderboard yet.";
+    } else {
+        leaderboardList.innerHTML="";
+        leaderboardSnap.forEach(doc=>{
+            const data = doc.data();
+            const div = document.createElement("div");
+            div.innerHTML=<strong>${data.team}</strong> - Points: ${data.points};
+            leaderboardList.appendChild(div);
+        });
+    }
+
+    // Example: fetch news
+    newsList.innerHTML="Loading...";
+    const newsSnap = await getDocs(collection(db,"news"));
+    if(newsSnap.empty){
+        newsList.innerHTML="No news yet.";
+    } else {
+        newsList.innerHTML="";
+        newsSnap.forEach(doc=>{
+            const data = doc.data();
+            const div = document.createElement("div");
+            div.innerHTML=<strong>${data.title}</strong> - ${data.content};
+            newsList.appendChild(div);
+        });
+    }
+}
+
+loadGlobalData();
