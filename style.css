@@ -34,20 +34,25 @@ background:#111;
 }
 
 .hero h2{
-font-size:2rem;
+font-size:2.2rem;
 margin-bottom:10px;
 }
 
-.registration, .points-calculator, .tournament{
+section{
 background:#111;
 margin:20px auto;
 padding:20px;
 width:90%;
-max-width:600px;
+max-width:800px;
 border-radius:10px;
 }
 
-.registration input, .points-calculator input{
+section h2{
+border-bottom:2px solid gold;
+padding-bottom:5px;
+}
+
+.registration input{
 width:90%;
 padding:15px;
 margin:8px 0;
@@ -56,7 +61,7 @@ border-radius:5px;
 border:none;
 }
 
-.registration button, .points-calculator button{
+.registration button{
 width:95%;
 padding:18px;
 background:gold;
